@@ -2,8 +2,11 @@ import { postCalls } from "./api/posts";
 import { userCalls } from "./api/users";
 import { Post, User } from "./types";
 
+// Main URL
 export const fetchURL = "http://localhost:3000/";
-// export const fetchURL = "https://fluted-quasar-419913.uw.r.appspot.com/";
+
+// Production URL
+// export const fetchURL = "http://localhost:3001/";
 
 export const getAllUsers = (setState: (value: User[]) => void) =>
   userCalls.getUsers().then((result) => setState(result));
@@ -15,7 +18,7 @@ export const reseedData = () => {
   console.log("Seeding database...");
   return fetch(fetchURL + "reseed-data")
     .then((response) => {
-      console.log("🌱 Database seeded 🌱");
+      console.log("🌱 Seeding complete 🌱");
       response.json();
     })
     .catch((err) => console.error(err));

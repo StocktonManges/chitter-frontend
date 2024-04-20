@@ -6,6 +6,7 @@ import { postCalls } from "./api/posts";
 import { authCalls } from "./api/auth";
 import toast from "react-hot-toast";
 import { getAllPosts, getAllUsers, reseedData } from "./utils";
+import Home from "./pages/Home";
 
 function App() {
   const [allUsers, setAllUsers] = useState<User[]>([]);
@@ -15,14 +16,8 @@ function App() {
   const [newUserEmail, setNewUserEmail] = useState<string>("");
   const [newUserPassword, setNewUserPassword] = useState<string>("");
   const [deleteUserEmail, setDeleteUserEmail] = useState<string>("");
-  const [allPosts, setAllPosts] = useState<Post[]>([]);
-  const [deletePostId, setDeletePostId] = useState<number>(0);
-  const [authorId, setAuthorId] = useState<number>(0);
-  const [postTitle, setPostTitle] = useState<string>("");
-  const [postContent, setPostContent] = useState<string>("");
 
   const fetchAllData = () => {
-    getAllPosts(setAllPosts);
     getAllUsers(setAllUsers);
   };
 
@@ -45,6 +40,14 @@ function App() {
           Reseed Data
         </button>
       </header>
+
+      <Home />
+
+      <br />
+      <br />
+      <br />
+      <br />
+
       <div>
         <h1>All Users</h1>
         <ul>
@@ -177,19 +180,7 @@ function App() {
           <button type="submit">Delete User</button>
         </form>
 
-        <h1>All Posts</h1>
-        <ul>
-          {allPosts.map((post, index) => (
-            <li key={post + index.toString()}>
-              <h4>
-                Title (id: {post.id}): {post.title}
-              </h4>
-              <div>Content: {post.content}</div>
-            </li>
-          ))}
-        </ul>
-
-        <form
+        {/* <form
           onSubmit={(e) => {
             e.preventDefault();
             postCalls.deletePost(deletePostId);
@@ -254,7 +245,7 @@ function App() {
           </div>
 
           <button type="submit">Create Post</button>
-        </form>
+        </form> */}
       </div>
     </>
   );
