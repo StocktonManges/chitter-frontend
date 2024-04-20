@@ -6,11 +6,17 @@ import { getAllUsers } from "../utils";
 export default function UserProvider({ children }: { children: ReactNode }) {
   const [allUsers, setAllUsers] = useState<User[]>([]);
 
-  useEffect(() => {
+  const refetchAllUsers = () => {
     getAllUsers(setAllUsers);
+  };
+
+  useEffect(() => {
+    refetchAllUsers();
   }, []);
 
   return (
-    <UserContext.Provider value={{ allUsers }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ allUsers, refetchAllUsers }}>
+      {children}
+    </UserContext.Provider>
   );
 }

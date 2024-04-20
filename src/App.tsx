@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
-import { Post, User } from "./types";
+import { User } from "./types";
 import { userCalls } from "./api/users";
-import { postCalls } from "./api/posts";
 import { authCalls } from "./api/auth";
 import toast from "react-hot-toast";
-import { getAllPosts, getAllUsers, reseedData } from "./utils";
+import { getAllUsers } from "./utils";
 import Home from "./pages/Home";
+import { Route, Routes } from "react-router-dom";
+import { UseNav } from "./providers/context-hooks";
+import Header from "./components/Header";
 
 function App() {
   const [allUsers, setAllUsers] = useState<User[]>([]);
@@ -17,31 +19,15 @@ function App() {
   const [newUserPassword, setNewUserPassword] = useState<string>("");
   const [deleteUserEmail, setDeleteUserEmail] = useState<string>("");
 
-  const fetchAllData = () => {
-    getAllUsers(setAllUsers);
-  };
-
-  useEffect(() => {
-    fetchAllData();
-  }, []);
+  const { navUrls } = UseNav();
 
   return (
     <>
-      <header>
-        <button
-          type="button"
-          onClick={async () => {
-            await reseedData();
-            console.log("Fetching updated data...");
-            await fetchAllData();
-            console.log("Data fetched! ✅");
-          }}
-        >
-          Reseed Data
-        </button>
-      </header>
-
-      <Home />
+      <Routes>
+        <Route path={navUrls.home} element={<Header />}>
+          <Route index element={<Home />} />
+        </Route>
+      </Routes>
 
       <br />
       <br />

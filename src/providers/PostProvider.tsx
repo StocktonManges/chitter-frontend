@@ -10,14 +10,19 @@ export default function PostProvider({ children }: { children: ReactNode }) {
   const [postTitle, setPostTitle] = useState<string>("");
   const [postContent, setPostContent] = useState<string>("");
 
-  useEffect(() => {
+  const refetchAllPosts = () => {
     getAllPosts(setAllPosts);
+  };
+
+  useEffect(() => {
+    refetchAllPosts();
   }, []);
 
   return (
     <PostContext.Provider
       value={{
         allPosts,
+        refetchAllPosts,
       }}
     >
       {children}

@@ -17,6 +17,12 @@ export type Post = z.infer<typeof postSchema>;
 
 export type TPostContext = {
   allPosts: Post[];
+  refetchAllPosts: () => void;
+};
+
+export type TUserContext = {
+  allUsers: User[];
+  refetchAllUsers: () => void;
 };
 
 type NavUrls = {
@@ -27,8 +33,4 @@ type NavUrls = {
 export type TNavProvider = {
   navigate: NavigateFunction;
   navUrls: NavUrls;
-};
-
-export type TUserContext = {
-  allUsers: User[];
 };
