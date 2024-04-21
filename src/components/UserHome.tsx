@@ -1,11 +1,12 @@
 import { useState } from "react";
 import SearchBar from "../components/SearchBar";
-import { usePost, useUser } from "../providers/context-hooks";
-import PostsDisplay from "../components/PostsDisplay";
+import { useAuth, usePost, useUser } from "../providers/context-hooks";
+import PostsDisplay from "./PostsDisplay";
 
-export default function Home() {
+export default function UserHome() {
   const [searchInput, setSearchInput] = useState<string>("");
   const { allPosts } = usePost();
+  const { activeUser } = useAuth();
   const { allUsers } = useUser();
 
   const matchingUserIds = allUsers
@@ -14,7 +15,8 @@ export default function Home() {
     )
     .map((user) => user.id);
 
-  const displayArr = allPosts.filter(
+  const userPosts = allPosts.filter((post) => post.authorId === activeUser?.id);
+  const displayArr = userPosts.filter(
     (post) =>
       post.content.toLowerCase().includes(searchInput.toLowerCase()) ||
       post.title.toLowerCase().includes(searchInput.toLowerCase()) ||
@@ -24,7 +26,7 @@ export default function Home() {
   return (
     <section className="container-fluid d-flex flex-column align-items-center">
       <div className="d-flex flex-column align-items-center py-4">
-        <h1>All Posts</h1>
+        <h1>My Posts</h1>
         <SearchBar setSearchInput={setSearchInput} />
       </div>
       <PostsDisplay displayArr={displayArr} />

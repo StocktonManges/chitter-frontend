@@ -1,7 +1,8 @@
+import { User } from "../types";
 import { fetchURL } from "../utils";
 
 export const authCalls = {
-  login: (email: string, password: string) =>
+  login: (email: string, password: string): Promise<{ user: User }> =>
     fetch(fetchURL + "auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

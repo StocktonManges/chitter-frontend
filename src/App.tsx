@@ -1,40 +1,38 @@
 import { useState } from "react";
-import "./App.css";
 import { User } from "./types";
-import { userCalls } from "./api/users";
-import { authCalls } from "./api/auth";
-import toast from "react-hot-toast";
-import { getAllUsers } from "./utils";
 import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
-import { UseNav } from "./providers/context-hooks";
-import Header from "./components/Header";
+import { useAuth, useNav } from "./providers/context-hooks";
+import GeneralHeader from "./components/GeneralHeader";
+import LoginForm from "./components/LoginForm";
+import UserHome from "./components/UserHome";
+import UserHeader from "./components/UserHeader";
+import "./css/styles.css";
 
 function App() {
   const [allUsers, setAllUsers] = useState<User[]>([]);
-  const [loginEmail, setLoginEmail] = useState<string>("");
-  const [loginPassword, setLoginPassword] = useState<string>("");
   const [newUserName, setNewUserName] = useState<string>("");
   const [newUserEmail, setNewUserEmail] = useState<string>("");
   const [newUserPassword, setNewUserPassword] = useState<string>("");
   const [deleteUserEmail, setDeleteUserEmail] = useState<string>("");
 
-  const { navUrls } = UseNav();
+  const { navUrls } = useNav();
+  const { activeUser } = useAuth();
 
   return (
     <>
       <Routes>
-        <Route path={navUrls.home} element={<Header />}>
+        <Route
+          path={navUrls.home}
+          element={activeUser ? <UserHeader /> : <GeneralHeader />}
+        >
           <Route index element={<Home />} />
+          <Route path={navUrls.login} element={<LoginForm />} />
+          <Route path={navUrls.userHome} element={<UserHome />} />
         </Route>
       </Routes>
 
-      <br />
-      <br />
-      <br />
-      <br />
-
-      <div>
+      {/* <div>
         <h1>All Users</h1>
         <ul>
           {allUsers.map((user, index) => (
@@ -45,47 +43,6 @@ function App() {
             </li>
           ))}
         </ul>
-
-        <h3>Login User</h3>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            authCalls
-              .login(loginEmail.toLowerCase(), loginPassword)
-              .then(() => {
-                setLoginEmail("");
-                setLoginPassword("");
-                toast.success("You're logged in!");
-              })
-              .catch((err) => toast.error(err.message));
-          }}
-        >
-          <div>
-            <label htmlFor="login-email">Email:</label>
-            <input
-              id="login-email"
-              type="email"
-              value={loginEmail}
-              onChange={(e) => {
-                setLoginEmail(e.target.value);
-              }}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="login-password">Password:</label>
-            <input
-              id="login-password"
-              type="text"
-              value={loginPassword}
-              onChange={(e) => {
-                setLoginPassword(e.target.value);
-              }}
-            />
-          </div>
-
-          <button type="submit">Login</button>
-        </form>
 
         <h3>Create User</h3>
         <form
@@ -166,7 +123,7 @@ function App() {
           <button type="submit">Delete User</button>
         </form>
 
-        {/* <form
+        <form
           onSubmit={(e) => {
             e.preventDefault();
             postCalls.deletePost(deletePostId);
@@ -231,8 +188,8 @@ function App() {
           </div>
 
           <button type="submit">Create Post</button>
-        </form> */}
-      </div>
+        </form>
+      </div> */}
     </>
   );
 }

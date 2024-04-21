@@ -12,6 +12,7 @@ export const postSchema = z.object({
   id: z.number(),
   title: z.string(),
   content: z.string(),
+  authorId: z.number(),
 });
 export type Post = z.infer<typeof postSchema>;
 
@@ -26,11 +27,23 @@ export type TUserContext = {
 };
 
 type NavUrls = {
+  domain: string;
   home: string;
   login: string;
+  userHome: string;
 };
 
-export type TNavProvider = {
+export type TNavContext = {
   navigate: NavigateFunction;
   navUrls: NavUrls;
+};
+
+export type TAuthContext = {
+  loginEmail: string;
+  setLoginEmail: (email: string) => void;
+  loginPassword: string;
+  setLoginPassword: (password: string) => void;
+  login: () => void;
+  activeUser: User | null;
+  logout: () => void;
 };
