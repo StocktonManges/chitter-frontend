@@ -1,30 +1,23 @@
-# React + TypeScript + Vite
+# Chitter
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Front End
 
-Currently, two official plugins are available:
+Chitter is a very basic version of Twitter where people can create an
+account with an encrypted password, look at other peoples' posts and publish their own.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+All posts are available to view and search on the home page without
+logging in. However, posts can only be created when a user creates an
+account. A new user's credentials are sent to the backend where the password is
+encrypted using the bcrypt node package to add security.
 
-## Expanding the ESLint configuration
+I utilized the useContext React hook to make providers of various
+functions and variables and coupled that with session storage to
+dynamically render elements throughout the app after a user logs in.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Backend
 
-- Configure the top-level `parserOptions` property like this:
+The backend is built using the Prisma, Express and bcrypt node packages
+for enabling CRUD operations, exposing endpoints and encrypting user
+passwords.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+The database itself uses the SQLite engine and I used the nodemon package to run the backend on a local server during development.
