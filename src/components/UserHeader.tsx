@@ -1,33 +1,17 @@
 import { Outlet } from "react-router-dom";
-import { useNav, usePost, useUser } from "../providers/context-hooks";
-import { reseedData } from "../utils";
+import { useAuth, useNav } from "../providers/context-hooks";
 import UserSettingsModal from "./UserSettingsModal";
+import ReseedButton from "./ReseedButton";
 
 export default function UserHeader() {
-  const { refetchAllUsers } = useUser();
-  const { refetchAllPosts } = usePost();
   const { navigate, navUrls } = useNav();
-  const fetchAllData = () => {
-    refetchAllPosts();
-    refetchAllUsers();
-  };
+  const { activeUser } = useAuth();
 
   return (
     <>
       <div className="container text-bg-dark p-0 m-0 mw-100">
         <header className="d-flex flex-wrap justify-content-center py-3 px-5 border-bottom">
-          <button
-            className="btn btn-secondary me-auto"
-            type="button"
-            onClick={async () => {
-              await reseedData();
-              console.log("Fetching updated data...");
-              await fetchAllData();
-              console.log("Data fetched! ✅");
-            }}
-          >
-            Reseed Data
-          </button>
+          <ReseedButton />
           <ul className="nav nav-pills">
             <li className="nav-item">
               <button
@@ -55,7 +39,7 @@ export default function UserHeader() {
                 data-bs-toggle="modal"
                 data-bs-target="#user-settings-modal"
               >
-                A
+                {activeUser?.name[0]}
               </button>
             </li>
           </ul>

@@ -10,6 +10,7 @@ export const NavProvider = ({ children }: { children: ReactNode }) => {
     home: "/",
     login: "/login",
     userHome: "/user/home",
+    signUp: "/sign-up",
   };
 
   return (

@@ -1,5 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useAuth, useNav } from "../providers/context-hooks";
+import { BSClass } from "../css/bootstrapClasses";
 
 export default function LoginForm() {
   const {
@@ -10,7 +11,7 @@ export default function LoginForm() {
     login,
     activeUser,
   } = useAuth();
-  const { navUrls } = useNav();
+  const { navUrls, navigate } = useNav();
 
   return activeUser ? (
     <Navigate to={navUrls.userHome} />
@@ -19,15 +20,16 @@ export default function LoginForm() {
       <div className="login-form-wrapper d-flex flex-column align-items-center w-100">
         <h3>Login User</h3>
         <form
-          className="d-flex flex-column align-items-center w-25"
+          className="login-form d-flex flex-column align-items-center flex-wrap w-100"
           onSubmit={(e) => {
             e.preventDefault();
             login();
           }}
         >
-          <div className="w-100 d-flex justify-content-between mt-3">
+          <div className={BSClass.formInputWrapper}>
             <label htmlFor="login-email">Email:</label>
             <input
+              className={BSClass.formInput}
               id="login-email"
               type="email"
               value={loginEmail}
@@ -37,9 +39,10 @@ export default function LoginForm() {
             />
           </div>
 
-          <div className="w-100 d-flex justify-content-between my-3">
+          <div className={BSClass.formInputWrapper + "mb-3"}>
             <label htmlFor="login-password">Password:</label>
             <input
+              className={BSClass.formInput}
               id="login-password"
               type="text"
               value={loginPassword}
@@ -51,6 +54,15 @@ export default function LoginForm() {
 
           <button type="submit" className="btn btn-primary">
             Login
+          </button>
+          <button
+            type="button"
+            className="btn btn-link"
+            onClick={() => {
+              navigate(navUrls.signUp);
+            }}
+          >
+            Create Account
           </button>
         </form>
       </div>

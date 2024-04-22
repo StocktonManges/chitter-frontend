@@ -10,10 +10,7 @@ export default function PostProvider({ children }: { children: ReactNode }) {
   const [postTitle, setPostTitle] = useState<string>("");
   const [postContent, setPostContent] = useState<string>("");
 
-  const refetchAllPosts = () => {
-    getAllPosts(setAllPosts);
-  };
-
+  const refetchAllPosts = () => getAllPosts(setAllPosts);
   useEffect(() => {
     refetchAllPosts();
   }, []);

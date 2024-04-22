@@ -1,7 +1,7 @@
 import { useAuth } from "../providers/context-hooks";
 
 export default function UserSettingsModal() {
-  const { logout } = useAuth();
+  const { logout, activeUser } = useAuth();
   return (
     <div className="modal fade" id="user-settings-modal">
       <div className="modal-dialog modal-dialog-centered">
@@ -14,7 +14,12 @@ export default function UserSettingsModal() {
               data-bs-target="#user-settings-modal"
             ></button>
           </div>
-          <div className="modal-body">Here are some settings.</div>
+          <div className="modal-body">
+            <ul className="list-unstyled">
+              <li>Name: {activeUser?.name}</li>
+              <li>Email: {activeUser?.email}</li>
+            </ul>
+          </div>
           <div className="modal-footer">
             <button
               className="btn btn-outline-danger"

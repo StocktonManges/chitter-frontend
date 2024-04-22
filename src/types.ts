@@ -5,6 +5,7 @@ export const userSchema = z.object({
   id: z.number(),
   email: z.string(),
   name: z.string(),
+  passwordHash: z.string(),
 });
 export type User = z.infer<typeof userSchema>;
 
@@ -18,12 +19,12 @@ export type Post = z.infer<typeof postSchema>;
 
 export type TPostContext = {
   allPosts: Post[];
-  refetchAllPosts: () => void;
+  refetchAllPosts: () => Promise<void>;
 };
 
 export type TUserContext = {
   allUsers: User[];
-  refetchAllUsers: () => void;
+  refetchAllUsers: () => Promise<void>;
 };
 
 type NavUrls = {
@@ -31,6 +32,7 @@ type NavUrls = {
   home: string;
   login: string;
   userHome: string;
+  signUp: string;
 };
 
 export type TNavContext = {
@@ -44,6 +46,17 @@ export type TAuthContext = {
   loginPassword: string;
   setLoginPassword: (password: string) => void;
   login: () => void;
-  activeUser: User | null;
+  activeUser: Omit<User, "passwordHash"> | null;
   logout: () => void;
+  newUserFirstName: string;
+  setNewUserFirstName: (name: string) => void;
+  newUserLastName: string;
+  setNewUserLastName: (name: string) => void;
+  newUserEmail: string;
+  setNewUserEmail: (email: string) => void;
+  newUserPassword: string;
+  setNewUserPassword: (password: string) => void;
+  newUserVerifyPassword: string;
+  setNewUserVerifyPassword: (password: string) => void;
+  handleValidSignUpSubmit: () => void;
 };

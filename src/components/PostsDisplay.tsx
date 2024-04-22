@@ -5,7 +5,7 @@ export default function PostsDisplay({ displayArr }: { displayArr: Post[] }) {
   const { allUsers } = useUser();
 
   const findAuthor = (authorId: number) =>
-    allUsers.filter((user) => user.id === authorId)[0];
+    allUsers.find((user) => user.id === authorId);
 
   return (
     <ul className="list-group-flushed list-unstyled d-flex flex-column align-items-center">
@@ -17,7 +17,7 @@ export default function PostsDisplay({ displayArr }: { displayArr: Post[] }) {
             </h4>
             <div className="card-body">
               <div className="card-title">
-                <strong>{findAuthor(post.authorId).name}</strong>
+                <strong>{findAuthor(post.authorId)?.name}</strong>
               </div>
               <div className="card-text">{post.content}</div>
             </div>

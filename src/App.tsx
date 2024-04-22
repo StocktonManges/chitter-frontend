@@ -8,13 +8,10 @@ import LoginForm from "./components/LoginForm";
 import UserHome from "./components/UserHome";
 import UserHeader from "./components/UserHeader";
 import "./css/styles.css";
+import SignUpForm from "./components/SignUpForm";
 
 function App() {
   const [allUsers, setAllUsers] = useState<User[]>([]);
-  const [newUserName, setNewUserName] = useState<string>("");
-  const [newUserEmail, setNewUserEmail] = useState<string>("");
-  const [newUserPassword, setNewUserPassword] = useState<string>("");
-  const [deleteUserEmail, setDeleteUserEmail] = useState<string>("");
 
   const { navUrls } = useNav();
   const { activeUser } = useAuth();
@@ -28,6 +25,7 @@ function App() {
         >
           <Route index element={<Home />} />
           <Route path={navUrls.login} element={<LoginForm />} />
+          <Route path={navUrls.signUp} element={<SignUpForm />} />
           <Route path={navUrls.userHome} element={<UserHome />} />
         </Route>
       </Routes>

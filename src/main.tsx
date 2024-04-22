@@ -11,11 +11,11 @@ import UserProvider from "./providers/UserProvider.tsx";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <BrowserRouter>
+      <Toaster />
       <NavProvider>
         <AuthProvider>
           <UserProvider>
             <PostProvider>
-              <Toaster />
               <App />
             </PostProvider>
           </UserProvider>

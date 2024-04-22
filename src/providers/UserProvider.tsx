@@ -6,10 +6,7 @@ import { getAllUsers } from "../utils";
 export default function UserProvider({ children }: { children: ReactNode }) {
   const [allUsers, setAllUsers] = useState<User[]>([]);
 
-  const refetchAllUsers = () => {
-    getAllUsers(setAllUsers);
-  };
-
+  const refetchAllUsers = () => getAllUsers(setAllUsers);
   useEffect(() => {
     refetchAllUsers();
   }, []);
