@@ -1,4 +1,4 @@
-import Home from "./pages/Home";
+import Home from "./components/Home";
 import { Route, Routes } from "react-router-dom";
 import { useAuth, useNav } from "./providers/context-hooks";
 import GeneralHeader from "./components/GeneralHeader";

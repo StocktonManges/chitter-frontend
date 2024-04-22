@@ -1,7 +1,7 @@
 import { useState } from "react";
-import SearchBar from "../components/SearchBar";
+import SearchBar from "./SearchBar";
 import { usePost, useUser } from "../providers/context-hooks";
-import PostsDisplay from "../components/PostsDisplay";
+import PostsDisplay from "./PostsDisplay";
 
 export default function Home() {
   const [searchInput, setSearchInput] = useState<string>("");
