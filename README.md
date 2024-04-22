@@ -20,4 +20,7 @@ The backend is built using the Prisma, Express and bcrypt node packages
 for enabling CRUD operations, exposing endpoints and encrypting user
 passwords.
 
-The database itself uses the SQLite engine and I used the nodemon package to run the backend on a local server during development.
+The database itself uses the SQLite engine and I used the nodemon
+package to run the backend on a local server during development.
+
+> Click [here](https://github.com/StocktonManges/chitter-backend) to visit the Chitter backend repository.
