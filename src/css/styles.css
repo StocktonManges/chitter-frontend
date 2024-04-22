@@ -3,6 +3,7 @@
   height: 40px;
 }
 
-.login-form {
+.login-form,
+.new-post-form {
   max-width: 280px;
 }

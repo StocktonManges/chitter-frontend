@@ -17,7 +17,6 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   const [newUserPassword, setNewUserPassword] = useState<string>("");
   const [newUserVerifyPassword, setNewUserVerifyPassword] =
     useState<string>("");
-  const [deleteUserEmail, setDeleteUserEmail] = useState<string>("");
 
   const { navigate, navUrls } = useNav();
 
@@ -92,6 +91,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         setLoginPassword,
         login,
         activeUser,
+        setActiveUser,
         logout,
         newUserFirstName,
         setNewUserFirstName,

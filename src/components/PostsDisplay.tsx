@@ -10,8 +10,12 @@ export default function PostsDisplay({ displayArr }: { displayArr: Post[] }) {
   return (
     <ul className="list-group-flushed list-unstyled d-flex flex-column align-items-center">
       {displayArr.map((post, index) => (
-        <li className="list-group-item p-3 w-75" key={post + index.toString()}>
-          <div className="card rounded-4">
+        <li
+          className="list-group-item p-3 w-75"
+          key={post + index.toString()}
+          style={{ minWidth: "350px" }}
+        >
+          <div className="card rounded-4 w-100">
             <h4 className="card-header bg-primary rounded-top-4">
               {post.title}
             </h4>

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { postSchema } from "../types";
+import { Post, postSchema } from "../types";
 import { fetchURL } from "../utils";
 
 export const postCalls = {
@@ -21,7 +21,11 @@ export const postCalls = {
       .catch((err) => console.error(err));
   },
 
-  createPost: (authorId: number, title: string, content: string) => {
+  createPost: (
+    authorId: number,
+    title: string,
+    content: string
+  ): Promise<Post> =>
     fetch(fetchURL + "posts/" + authorId, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -31,8 +35,11 @@ export const postCalls = {
         content,
       }),
     })
-      .then((response) => response.json())
-      .then((result) => console.log(result))
-      .catch((err) => console.error(err));
-  },
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error("Invalid post details");
+        }
+        return response.json();
+      })
+      .then((result) => postSchema.parse(result)),
 };

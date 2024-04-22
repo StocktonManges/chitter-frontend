@@ -20,6 +20,11 @@ export type Post = z.infer<typeof postSchema>;
 export type TPostContext = {
   allPosts: Post[];
   refetchAllPosts: () => Promise<void>;
+  newPostTitle: string;
+  setNewPostTitle: (title: string) => void;
+  newPostContent: string;
+  setNewPostContent: (content: string) => void;
+  publishPost: () => Promise<string | Post> | null;
 };
 
 export type TUserContext = {
@@ -47,6 +52,7 @@ export type TAuthContext = {
   setLoginPassword: (password: string) => void;
   login: () => void;
   activeUser: Omit<User, "passwordHash"> | null;
+  setActiveUser: (value: Omit<User, "passwordHash"> | null) => void;
   logout: () => void;
   newUserFirstName: string;
   setNewUserFirstName: (name: string) => void;

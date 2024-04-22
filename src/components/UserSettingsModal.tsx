@@ -12,7 +12,7 @@ export default function UserSettingsModal() {
               className="btn-close"
               data-bs-dismiss="modal"
               data-bs-target="#user-settings-modal"
-            ></button>
+            />
           </div>
           <div className="modal-body">
             <ul className="list-unstyled">

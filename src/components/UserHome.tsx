@@ -29,7 +29,11 @@ export default function UserHome() {
         <h1>My Posts</h1>
         <SearchBar setSearchInput={setSearchInput} />
       </div>
-      <PostsDisplay displayArr={displayArr} />
+      {displayArr.length === 0 ? (
+        <h3>Click the blue '+' in the header to publish your first post!</h3>
+      ) : (
+        <PostsDisplay displayArr={displayArr} />
+      )}
     </section>
   );
 }
