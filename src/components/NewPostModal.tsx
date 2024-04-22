@@ -12,7 +12,7 @@ export default function NewPostModal() {
 
   return (
     <div className="modal fade" id="new-post-modal">
-      <div className="modal-dialog modal-dialog-centered">
+      <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div className="modal-content">
           <div className="modal-header">
             <h2>New Post</h2>
@@ -45,10 +45,10 @@ export default function NewPostModal() {
 
               <div className={BSClass.formInputWrapper + "mb-3"}>
                 <label htmlFor="content">Content:</label>
-                <input
+                <textarea
                   className={BSClass.formInput}
+                  style={{ minWidth: "190px" }}
                   id="content"
-                  type="text"
                   value={newPostContent}
                   onChange={(e) => {
                     setNewPostContent(e.target.value);
