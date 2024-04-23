@@ -4,6 +4,7 @@
 }
 
 .login-form,
-.new-post-form {
+.new-post-form,
+.sign-up-form {
   max-width: 280px;
 }

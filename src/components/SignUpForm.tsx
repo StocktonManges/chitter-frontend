@@ -33,9 +33,9 @@ export default function SignUpForm() {
   ) : (
     <div className="container-fluid d-flex align-items-center position-absolute translate-middle top-50 start-50">
       <div className="login-form-wrapper d-flex flex-column align-items-center w-100">
-        <h3>Login User</h3>
+        <h3>Create Account</h3>
         <form
-          className="login-form d-flex flex-column align-items-center flex-wrap w-100"
+          className="sign-up-form d-flex flex-column align-items-center flex-wrap w-100"
           onSubmit={(e) => {
             e.preventDefault();
             validationsPassed
