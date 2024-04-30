@@ -14,6 +14,15 @@ I utilized the useContext React hook to make providers of various
 functions and variables and coupled that with session storage to
 dynamically render elements throughout the app after a user logs in.
 
+To run the front end locally, run the following commands:
+
+```
+npm i
+npm run dev
+```
+
+> Click [here](https://github.com/StocktonManges/chitter-frontend) to visit the Chitter front end repository.
+
 ## Backend
 
 The backend is built using the Prisma, Express and bcrypt node packages
@@ -22,5 +31,12 @@ passwords.
 
 The database itself uses the SQLite engine and I used the nodemon
 package to run the backend on a local server during development.
+
+To run the backend locally, run the following commands:
+
+```
+npm i
+npx nodemon
+```
 
 > Click [here](https://github.com/StocktonManges/chitter-backend) to visit the Chitter backend repository.

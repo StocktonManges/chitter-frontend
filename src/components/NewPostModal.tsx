@@ -1,5 +1,6 @@
+import { useEffect } from "react";
 import { BSClass } from "../css/bootstrapClasses";
-import { usePost } from "../providers/context-hooks";
+import { useAuth, usePost } from "../providers/context-hooks";
 
 export default function NewPostModal() {
   const {
@@ -9,6 +10,17 @@ export default function NewPostModal() {
     setNewPostContent,
     publishPost,
   } = usePost();
+  const { activeUser } = useAuth();
+
+  const clearNewPostForm = () => {
+    setNewPostTitle("");
+    setNewPostContent("");
+  };
+
+  useEffect(() => {
+    clearNewPostForm();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeUser]);
 
   return (
     <div className="modal fade" id="new-post-modal">
@@ -61,7 +73,10 @@ export default function NewPostModal() {
             <button
               form="new-post-form"
               className="btn btn-outline-primary"
-              onClick={publishPost}
+              onClick={() => {
+                publishPost();
+                clearNewPostForm();
+              }}
               data-bs-dismiss="modal"
               data-bs-target="#new-post-modal"
             >
