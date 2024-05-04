@@ -2,7 +2,7 @@ import { postCalls } from "./api/posts";
 import { userCalls } from "./api/users";
 import { Post, User } from "./types";
 
-export const fetchURL = "https://sqliteapp-ttpxmmzj3a-uc.a.run.app";
+export const fetchURL = "https://sqliteapp-ttpxmmzj3a-uc.a.run.app/";
 
 export const getAllUsers = (setState: (value: User[]) => void) =>
   userCalls.getUsers().then((result) => setState(result));
