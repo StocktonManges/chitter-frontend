@@ -1,6 +1,7 @@
 import { Navigate } from "react-router-dom";
 import { useAuth, useNav } from "../providers/context-hooks";
 import { BSClass } from "../css/bootstrapClasses";
+import { useState } from "react";
 
 export default function LoginForm() {
   const {
@@ -12,6 +13,7 @@ export default function LoginForm() {
     activeUser,
   } = useAuth();
   const { navUrls, navigate } = useNav();
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
   return activeUser ? (
     <Navigate to={navUrls.userHome} />
@@ -39,17 +41,29 @@ export default function LoginForm() {
             />
           </div>
 
-          <div className={BSClass.formInputWrapper + "mb-3"}>
+          <div className={BSClass.formInputWrapper + "mb-3 position-relative"}>
             <label htmlFor="login-password">Password:</label>
             <input
               className={BSClass.formInput}
               id="login-password"
-              type="text"
+              type={isPasswordVisible ? "text" : "password"}
               value={loginPassword}
               onChange={(e) => {
                 setLoginPassword(e.target.value);
               }}
             />
+            <div
+              className="position-absolute end-0 me-1 px-1 bg-white"
+              onClick={() => {
+                setIsPasswordVisible(!isPasswordVisible);
+              }}
+            >
+              <i
+                className={`fa-solid fa-eye${
+                  isPasswordVisible ? "" : "-slash"
+                }`}
+              ></i>
+            </div>
           </div>
 
           <button type="submit" className="btn btn-primary">

@@ -2,6 +2,7 @@ import { Navigate } from "react-router-dom";
 import { useAuth, useNav } from "../providers/context-hooks";
 import toast from "react-hot-toast";
 import { BSClass } from "../css/bootstrapClasses";
+import { useState } from "react";
 
 export default function SignUpForm() {
   const {
@@ -19,6 +20,7 @@ export default function SignUpForm() {
     handleValidSignUpSubmit,
   } = useAuth();
   const { navUrls } = useNav();
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
   const validationsPassed =
     newUserPassword === newUserVerifyPassword &&
@@ -84,30 +86,54 @@ export default function SignUpForm() {
             />
           </div>
 
-          <div className={BSClass.formInputWrapper}>
+          <div className={BSClass.formInputWrapper + "position-relative"}>
             <label htmlFor="new-user-password">Password:</label>
             <input
               className={BSClass.formInput}
               id="new-user-password"
-              type="text"
+              type={isPasswordVisible ? "text" : "password"}
               value={newUserPassword}
               onChange={(e) => {
                 setNewUserPassword(e.target.value);
               }}
             />
+            <div
+              className="position-absolute end-0 me-1 px-1 bg-white"
+              onClick={() => {
+                setIsPasswordVisible(!isPasswordVisible);
+              }}
+            >
+              <i
+                className={`fa-solid fa-eye${
+                  isPasswordVisible ? "" : "-slash"
+                }`}
+              ></i>
+            </div>
           </div>
 
-          <div className={BSClass.formInputWrapper + "mb-3"}>
+          <div className={BSClass.formInputWrapper + "mb-3 position-relative"}>
             <label htmlFor="new-user-password2">Re-enter Password:</label>
             <input
               className={BSClass.formInput}
               id="new-user-password2"
-              type="text"
+              type={isPasswordVisible ? "text" : "password"}
               value={newUserVerifyPassword}
               onChange={(e) => {
                 setNewUserVerifyPassword(e.target.value);
               }}
             />
+            <div
+              className="position-absolute end-0 me-1 px-1 bg-white"
+              onClick={() => {
+                setIsPasswordVisible(!isPasswordVisible);
+              }}
+            >
+              <i
+                className={`fa-solid fa-eye${
+                  isPasswordVisible ? "" : "-slash"
+                }`}
+              ></i>
+            </div>
           </div>
 
           <button type="submit" className="btn btn-primary">
