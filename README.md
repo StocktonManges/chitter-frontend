@@ -12,31 +12,16 @@ encrypted using the bcrypt node package to add security.
 
 I utilized the useContext React hook to make providers of various
 functions and variables and coupled that with session storage to
-dynamically render elements throughout the app after a user logs in.
-
-To run the front end locally, run the following commands:
-
-```
-npm i
-npm run dev
-```
+dynamically render elements throughout the app after a user logs in. As
+for the styling, I used almost entirely Bootstrap.
 
 > Click [here](https://github.com/StocktonManges/chitter-frontend) to visit the Chitter front end repository.
 
 ## Backend
 
-The backend is built using the Prisma, Express and bcrypt node packages
-for enabling CRUD operations, exposing endpoints and encrypting user
-passwords.
-
-The database itself uses the SQLite engine and I used the nodemon
-package to run the backend on a local server during development.
-
-To run the backend locally, run the following commands:
-
-```
-npm i
-npx nodemon
-```
+The backend is built using the Prisma, Express, Zod and bcrypt node packages
+for enabling CRUD operations, exposing endpoints, ensuring type safety
+and encrypting user passwords. The database itself uses the SQLite
+engine.
 
 > Click [here](https://github.com/StocktonManges/chitter-backend) to visit the Chitter backend repository.
